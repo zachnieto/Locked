@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, Button } from 'react-native';
 import fire from '../fire'
 import firebase from 'firebase';
@@ -7,6 +7,9 @@ export default function Account({ navigation, route }) {
 
     var database = firebase.firestore()
 
+    const [name, setName] = useState('');
+    const [age, setAge] = useState('');
+
     const getUser = (uid) => {
 
         database.collection('users')
@@ -14,7 +17,8 @@ export default function Account({ navigation, route }) {
         .get()
         .then((doc) => {
             if (doc.exists) {
-                console.log("Name", doc.data().name);
+                setName(doc.data().name)
+                setAge(doc.data().age)
             }
             else {
                 console.log("Couldnt get user data");
@@ -28,14 +32,6 @@ export default function Account({ navigation, route }) {
     }
 
     useEffect(() => {
-        // const authListener = () => {
-        //   fire.auth().onAuthStateChanged((user) => {
-        //     if (user) {
-        //         getUser(route.params.uid);
-        //     }
-        //   });
-        // };
-        //authListener();
 
         if (route.params?.uid) {
             getUser(route.params.uid)
@@ -46,6 +42,8 @@ export default function Account({ navigation, route }) {
     return (
         
         <View style={styles.container}>
+            <Text>{name}</Text>
+            <Text>{age}</Text>
             <Button title="Logout" onPress={handleLogout}/>
         </View>
         

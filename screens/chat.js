@@ -11,6 +11,14 @@ export default function Chat({ navigation }) {
     */
 
 
+    useEffect(() => {
+
+        if (route.params?.uid) {
+            getUser(route.params.uid)
+        }
+
+    }, [route.params?.uid]);    
+
     return (
         <View>
             <Text>Hello</Text>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, Button, TextInput, Pressable } from 'react-native';
+import { StyleSheet, View, Text, TextInput, Pressable, Image } from 'react-native';
 import fire from '../fire'
 import { LinearGradient } from 'expo-linear-gradient';
 import firebase from 'firebase';
@@ -113,8 +113,11 @@ export default function Login({ navigation }) {
       colors={['#d100ff', '#00d4ff']}
       useAngle={true} angle={45} angleCenter={{x:0.5,y:0.5}}
     >
-      <View>
-        <Text style={styles.appName}>Locked</Text>
+      <Image 
+        source={require('../assets/locked.png')}
+        style={styles.logo}
+      />
+
         <Text style={styles.text}>EMAIL</Text>
         <TextInput style={styles.input} type="text" autoFocus required value={email} onChangeText={text => setEmail(text)} />
         <Text>{emailError}</Text>
@@ -146,7 +149,6 @@ export default function Login({ navigation }) {
         )
         }
         
-      </View>
     </LinearGradient>
   );
 };
@@ -163,7 +165,7 @@ const styles = StyleSheet.create({
   text: {
     color: 'white',
     textAlign: 'center',
-    fontSize: 20
+    fontSize: 30
   },
   appName: {
     color: 'white',
@@ -189,5 +191,9 @@ const styles = StyleSheet.create({
     fontSize: 20,
     borderColor: 'white',
     color: 'white'
+  },
+  logo: {
+    width: '70%',
+    height: '40%'
   }
 });

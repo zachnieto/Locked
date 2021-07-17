@@ -3,12 +3,14 @@ import { StyleSheet, View, Text, Button, TextInput, Pressable } from 'react-nati
 import { LinearGradient } from 'expo-linear-gradient';
 import firebase from 'firebase';
 import Geolocation from '@react-native-community/geolocation';
+//import MultiSlider from '@ptomasroos/react-native-multi-slider';
 
 export default function SignUp({ navigation, route }) {
 
     const [name, setName] = useState('');
     const [age, setAge] = useState('');
     const [ageError, setAgeError] = useState('');
+    const [location, setLocation] = useState('');
 
 
     var database = firebase.firestore()
@@ -22,7 +24,14 @@ export default function SignUp({ navigation, route }) {
 
         console.log("Added user info");
 
-        Geolocation.getCurrentPosition(info => console.log(info));
+        Geolocation.getCurrentPosition(
+            loc => {
+              setLocation(JSON.stringify(loc))
+            },
+            error => Alert.alert('Error', JSON.stringify(error))
+          );
+
+        console.log(location)
 
         let uid = firebase.auth().currentUser.uid
 
