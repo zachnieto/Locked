@@ -6,6 +6,7 @@ import firebase from 'firebase';
 export default function Account({ navigation, route }) {
 
     var database = firebase.firestore()
+    
 
     const [name, setName] = useState('');
     const [age, setAge] = useState('');
