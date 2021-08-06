@@ -91,7 +91,7 @@ export default function Login({ navigation }) {
           .then((doc) => {
             if (doc.exists) {
               console.log("Cached document data:", doc.data());
-              navigation.navigate("Home", { screen: 'Account' });
+              navigation.navigate("Home", { screen: 'Account', params: { user: doc.data() }});
             }
             else {
               navigation.navigate("SignUp", { email: email });

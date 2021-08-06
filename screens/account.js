@@ -11,21 +11,6 @@ export default function Account({ navigation, route }) {
     const [name, setName] = useState('');
     const [age, setAge] = useState('');
 
-    const getUser = (uid) => {
-
-        database.collection('users')
-        .doc(uid)
-        .get()
-        .then((doc) => {
-            if (doc.exists) {
-                setName(doc.data().name)
-                setAge(doc.data().age)
-            }
-            else {
-                console.log("Couldnt get user data");
-            }
-        });
-    }
 
     const handleLogout = () => {
         fire.auth().signOut();
@@ -34,17 +19,18 @@ export default function Account({ navigation, route }) {
 
     useEffect(() => {
 
-        if (route.params?.uid) {
-            getUser(route.params.uid)
-        }
+        console.log(route.params)
 
-      }, [route.params?.uid]);
+        setName(route.params.user.name)
+        setAge(route.params.user.age)
+
+      }, [route.params]);
 
     return (
         
         <View style={styles.container}>
-            <Text>{name}</Text>
-            <Text>{age}</Text>
+            <Text>Name {name}</Text>
+            <Text>Age {age}</Text>
             <Button title="Logout" onPress={handleLogout}/>
         </View>
         

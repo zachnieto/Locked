@@ -3,7 +3,6 @@ import { StyleSheet, View, Text, Button, TextInput, Pressable } from 'react-nati
 import { LinearGradient } from 'expo-linear-gradient';
 import firebase from 'firebase';
 import Geolocation from '@react-native-community/geolocation';
-//import MultiSlider from '@ptomasroos/react-native-multi-slider';
 
 export default function SignUp({ navigation, route }) {
 
@@ -39,6 +38,7 @@ export default function SignUp({ navigation, route }) {
             email: route.params.email,
             name: name,
             age: age,
+            match: ''
             //latitude: location.latitude,
             //longitude: location.longitude
         })
